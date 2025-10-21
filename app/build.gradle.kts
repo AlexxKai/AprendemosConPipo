@@ -6,9 +6,8 @@ plugins {
 
 android {
     namespace = "com.example.aprendemosconpipo"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
+
 
     defaultConfig {
         applicationId = "com.example.aprendemosconpipo"

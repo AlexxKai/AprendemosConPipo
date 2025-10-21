@@ -38,6 +38,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
@@ -86,18 +87,20 @@ fun PantallaPrincipal(modifier: Modifier = Modifier) {
     // Categorías principales
     val categories = listOf("Cuadros iniciales", "Imagenes", "Iconos", "Botones", "Texto variable")
 
-    // Pestañas por categoría
-    val tabsByCategory = listOf(
-        listOf(),  // Cuadros iniciales
-        listOf(),  // Imagenes
-        listOf(),  // Iconos
-        listOf("Colores", "Layouts", "Diseño"),  // Botones
-        listOf(),  // Texto variable
-    )
+//    // Pestañas por categoría
+//    val tabsByCategory = listOf(
+//        listOf("Buenas"),  // Cuadros iniciales
+//        listOf("Saludos"),  // Imagenes
+//        listOf("Hola"),  // Iconos
+//        listOf("Colores", "Layouts", "Diseño"),  // Botones
+//        listOf("jeje"),  // Texto variable
+//    )
 
     Column(modifier = modifier.fillMaxSize()) {
         // Primera fila: Categorías
-        TabRow(
+        // ScrollableTabRow -> para poder deslizar por la barra
+        // ScrollableTabRow -> para ver solo lo que hay
+        ScrollableTabRow(
             selectedTabIndex = selectedCategoryIndex,
             containerColor = Color(0xFF6200EE),
             contentColor = Color.White
@@ -114,21 +117,21 @@ fun PantallaPrincipal(modifier: Modifier = Modifier) {
             }
         }
 
-        // Segunda fila: Pestañas de la categoría seleccionada
-        TabRow(
-            selectedTabIndex = selectedTabIndex,
-            containerColor = Color(0xFF7C4DFF),
-            contentColor = Color.White,
-            modifier = Modifier.horizontalScroll(rememberScrollState())
-        ) {
-            tabsByCategory[selectedCategoryIndex].forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    text = { Text(text = title, fontSize = 12.sp) }
-                )
-            }
-        }
+//        // Segunda fila: Pestañas de la categoría seleccionada
+//        TabRow(
+//            selectedTabIndex = selectedTabIndex,
+//            containerColor = Color(0xFF7C4DFF),
+//            contentColor = Color.White,
+//            modifier = Modifier.horizontalScroll(rememberScrollState())
+//        ) {
+//            tabsByCategory[selectedCategoryIndex].forEachIndexed { index, title ->
+//                Tab(
+//                    selected = selectedTabIndex == index,
+//                    onClick = { selectedTabIndex = index },
+//                    text = { Text(text = title, fontSize = 12.sp) }
+//                )
+//            }
+//        }
 
         // Contenido según la selección
         Surface(
