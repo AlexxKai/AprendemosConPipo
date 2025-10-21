@@ -181,9 +181,6 @@ fun Formas() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(24.dp)
-            // Para hacer scroll en la pantalla
-            .verticalScroll(rememberScrollState())
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     )
@@ -257,9 +254,6 @@ fun Imagenes() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(24.dp)
-            // Para hacer scroll en la pantalla
-            .verticalScroll(rememberScrollState())
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -283,9 +277,6 @@ fun Iconos() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(24.dp)
-            // Para hacer scroll en la pantalla
-            .verticalScroll(rememberScrollState())
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -317,7 +308,6 @@ fun Botones() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(24.dp)
             // Para hacer scroll en la pantalla
             .verticalScroll(rememberScrollState())
             .background(Color.White),
@@ -410,7 +400,16 @@ fun Botones() {
 // Cuadro para reconocer el texto que mete el usuario
 @Composable
 fun TextoVariable() {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+            .fillMaxHeight()
+            // Para hacer scroll en la pantalla
+            .verticalScroll(rememberScrollState())
+            .background(Color.White),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         var name by remember { mutableStateOf("") }
         if (name.isNotEmpty()) {
             Text(
