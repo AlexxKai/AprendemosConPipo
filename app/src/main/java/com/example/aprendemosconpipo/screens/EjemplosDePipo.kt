@@ -23,7 +23,9 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
@@ -32,12 +34,14 @@ import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -58,9 +62,28 @@ import coil.compose.AsyncImage
 import com.example.aprendemosconpipo.R
 import com.example.aprendemosconpipo.R.string.dados
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = Modifier) {
-    var selectedCategoryIndex by remember { mutableIntStateOf(0) }
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                modifier = Modifier.height(60.dp),
+                title = {
+                    Text(
+                        "Segunda ventana",
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                colors = topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = Color.White
+                )
+            )
+        }
+    ) { innerPadding ->
+        var selectedCategoryIndex by remember { mutableIntStateOf(0) }
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
     // Categorías principales
@@ -75,7 +98,9 @@ fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = 
 //        listOf("jeje"),  // Texto variable
 //    )
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier
+        .padding(innerPadding)
+        .fillMaxSize()) {
         // Primera fila: Categorías
         // ScrollableTabRow -> para poder deslizar por la barra
         // ScrollableTabRow -> para ver solo lo que hay
@@ -160,6 +185,7 @@ fun Formas() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .padding(innerPadding)
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     )
