@@ -18,6 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
@@ -30,6 +31,7 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -71,7 +73,7 @@ fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = 
                 modifier = Modifier.height(60.dp),
                 title = {
                     Text(
-                        "Segunda ventana",
+                        "Aprendemos con Pipo",
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -79,15 +81,20 @@ fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = 
                 colors = topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = Color.White
-                )
+                ), navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "backIcon")
+                    }
+                }
             )
         }
     ) { innerPadding ->
         var selectedCategoryIndex by remember { mutableIntStateOf(0) }
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
+        var selectedTabIndex by remember { mutableIntStateOf(0) }
 
-    // Categorías principales
-    val categories = listOf("Cuadros iniciales", "Imagenes", "Iconos", "Botones", "Texto variable")
+        // Categorías principales
+        val categories =
+            listOf("Cuadros iniciales", "Imagenes", "Iconos", "Botones", "Variable")
 
 //    // Pestañas por categoría
 //    val tabsByCategory = listOf(
@@ -98,28 +105,36 @@ fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = 
 //        listOf("jeje"),  // Texto variable
 //    )
 
-    Column(modifier = Modifier
-        .padding(innerPadding)
-        .fillMaxSize()) {
-        // Primera fila: Categorías
-        // ScrollableTabRow -> para poder deslizar por la barra
-        // ScrollableTabRow -> para ver solo lo que hay
-        ScrollableTabRow(
-            selectedTabIndex = selectedCategoryIndex,
-            containerColor = Color(0xFF6200EE),
-            contentColor = Color.White
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
         ) {
-            categories.forEachIndexed { index, title ->
-                Tab(
-                    selected = selectedCategoryIndex == index,
-                    onClick = {
-                        selectedCategoryIndex = index
-                        selectedTabIndex = 0 // Resetear al cambiar categoría
-                    },
-                    text = { Text(text = title, fontSize = 14.sp, fontWeight = FontWeight.Bold) }
-                )
+            // Primera fila: Categorías
+            // ScrollableTabRow -> para poder deslizar por la barra
+            // ScrollableTabRow -> para ver solo lo que hay
+            ScrollableTabRow(
+                selectedTabIndex = selectedCategoryIndex,
+                containerColor = Color(0xFF6200EE),
+                contentColor = Color.White
+            ) {
+                categories.forEachIndexed { index, title ->
+                    Tab(
+                        selected = selectedCategoryIndex == index,
+                        onClick = {
+                            selectedCategoryIndex = index
+                            selectedTabIndex = 0 // Resetear al cambiar categoría
+                        },
+                        text = {
+                            Text(
+                                text = title,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    )
+                }
             }
-        }
 
 //        // Segunda fila: Pestañas de la categoría seleccionada
 //        TabRow(
@@ -137,42 +152,43 @@ fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = 
 //            }
 //        }
 
-        // Contenido según la selección
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = Color.DarkGray
-        ) {
-            when (selectedCategoryIndex) {
-                0 -> { // Formas
-                    when (selectedTabIndex) {
-                        0 -> Formas()
+            // Contenido según la selección
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = Color.DarkGray
+            ) {
+                when (selectedCategoryIndex) {
+                    0 -> { // Formas
+                        when (selectedTabIndex) {
+                            0 -> Formas()
+                        }
                     }
-                }
 
-                1 -> { // Imagenes
-                    when (selectedTabIndex) {
-                        0 -> Imagenes()
+                    1 -> { // Imagenes
+                        when (selectedTabIndex) {
+                            0 -> Imagenes()
+                        }
                     }
-                }
 
-                2 -> { // Iconos
-                    when (selectedTabIndex) {
-                        0 -> Iconos()
+                    2 -> { // Iconos
+                        when (selectedTabIndex) {
+                            0 -> Iconos()
+                        }
                     }
-                }
 
-                3 -> { // Botones
-                    when (selectedTabIndex) {
-                        0 -> Botones()
+                    3 -> { // Botones
+                        when (selectedTabIndex) {
+                            0 -> Botones()
+                        }
                     }
-                }
 
-                4 -> { // TextoVariable
-                    when (selectedTabIndex) {
-                        0 -> TextoVariable()
+                    4 -> { // Variable
+                        when (selectedTabIndex) {
+                            0 -> Variable()
+                        }
                     }
-                }
 
+                }
             }
         }
     }
@@ -185,7 +201,6 @@ fun Formas() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .padding(innerPadding)
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     )
@@ -404,7 +419,7 @@ fun Botones() {
 
 // Cuadro para reconocer el texto que mete el usuario
 @Composable
-fun TextoVariable() {
+fun Variable() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -414,20 +429,47 @@ fun TextoVariable() {
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var name by remember { mutableStateOf("") }
-        if (name.isNotEmpty()) {
+        var contador by remember { mutableStateOf(0) }
+        Column {
             Text(
-                text = "Dame un $name!",
-                modifier = Modifier.padding(bottom = 8.dp),
+                text = "¡El número de golpes es: $contador!",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
-        OutlinedTextField(
-            value = name, // Valor actual del campo de texto es la variable name
-            onValueChange = {
-                name = it
-            }, // Actualiza la variable name con el nuevo valor escrito
-            label = { Text("Un que ") } // Etiqueta dentro del campo de texto para indicarquéinformacióndebeingresarse)}
-        )
+
+        Row(
+            modifier = Modifier
+                .padding(top = 20.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(onClick = { contador++ })
+            { Text("Click") }
+
+            FilledTonalButton(onClick = { contador = 0 })
+            { Text("Reset") }
+        }
+
+
+        var name by remember { mutableStateOf("") }
+        Column {
+            if (name.isNotEmpty()) {
+                Text(
+                    text = "Hola, $name!",
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            Row {
+                OutlinedTextField(
+                    modifier = Modifier.padding(2.dp),
+                    value = name, // Valor actual del campo de texto es la variable name
+                    onValueChange = {
+                        name = it
+                    }, // Actualiza la variable name con el nuevo valor escrito
+                    label = { Text("Nombre") } // Etiqueta dentro del campo de texto para indicar qué información debe ingresarse)}
+                )
+            }
+        }
     }
 }

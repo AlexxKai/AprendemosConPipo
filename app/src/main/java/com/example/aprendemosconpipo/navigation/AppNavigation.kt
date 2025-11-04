@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.aprendemosconpipo.screens.EjemplosDePipo
+import com.example.aprendemosconpipo.screens.PipoAprende
 import com.example.aprendemosconpipo.screens.PipoP
 import com.example.aprendemosconpipo.screens.PipoS
 
@@ -30,6 +31,9 @@ fun AppNavigation(modifier: Modifier) {
         }
         composable(route = AppScreens.EjemplosDePipo.route) {
             EjemplosDePipo(navController)
+        }
+        composable(route = AppScreens.PipoAprende.route) {
+            PipoAprende(navController)
         }
     }
 }

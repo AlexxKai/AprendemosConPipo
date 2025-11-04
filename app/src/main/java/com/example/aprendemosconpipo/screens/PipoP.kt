@@ -41,9 +41,9 @@ fun PipoP(navController: NavController) {
                         fontWeight = FontWeight.Bold
                     )
                 },
-                colors=topAppBarColors(
-                    containerColor= MaterialTheme.colorScheme.primary,
-                    titleContentColor=Color.White
+                colors = topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = Color.White
                 )
             )
         }
@@ -74,6 +74,23 @@ fun PipoP(navController: NavController) {
                     }) {
                     Text(text = "Ejemplos Pipo")
                 }
+                Button(
+                    modifier = Modifier
+                        .padding(horizontal = 25.dp, vertical = 10.dp),
+                    onClick = {
+                        navController.navigate(route = AppScreens.PipoAprende.route)
+                        println("Botón pulsado")
+                    }) {
+                    Text(text = "Pipo Aprende")
+                }
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.LightGray),
+                horizontalArrangement = Arrangement.Center
+            )
+            {
                 Button(
                     modifier = Modifier
                         .padding(horizontal = 50.dp, vertical = 10.dp),
