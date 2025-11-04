@@ -1,8 +1,11 @@
 package com.example.aprendemosconpipo.screens
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +17,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -24,6 +29,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -52,6 +58,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -170,69 +177,80 @@ fun Lista() {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(Color.White),
+            .background(Color.DarkGray),
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
-        // Primer cuadro
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .background(Color.Cyan),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
+        //Cuandro para entregar
+        LazyColumn(
         ) {
-            Text(
-                "Desarrollo en Android",
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                textDecoration = TextDecoration.Underline
-            )
+            //Un item simple
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Start,
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.lp2),
+                        contentDescription = "Imagen cargada en local",
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .border(shape = CircleShape, width = 2.dp, color = Color.Black)
+                            .size(100.dp),
+                    )
+                    Column {
+                        Text(
+                            text = "Linkin Park",
+                            modifier = Modifier
+                                .size(100.dp),
+                            color = Color.White
+                        )
+                        Text(
+                            text = "Descripción",
+                            modifier = Modifier
+                                .size(70.dp),
+                            color = Color.Magenta
+                        )
+                    }
+                }
+
+            }
         }
-        Spacer(Modifier.height(10.dp))
+    }
 
-        // Cuadro grados
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-                .background(Color.LightGray),
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text = " DAM",
-                fontSize = 13.sp,
-                modifier = Modifier
-                    .size(70.dp)
-                    .background(color = Color.Yellow)
-                    .border(3.dp, color = Color.Black)
-                    .wrapContentSize(Alignment.CenterStart)
-                    .padding(horizontal = 5.dp)
-            )
+    //Ejemplo de los apuntes
+    // Primer cuadro
+    LazyColumn() {
+        //Un item simple
+        item {
+            Text(text = "Primer item")
+        }
 
-            Text(
-                text = "DAW",
-                fontSize = 13.sp,
-                modifier = Modifier
-                    .size(70.dp)
-                    .background(color = Color.Green, shape = CircleShape)
-                    .border(3.dp, color = Color.Black, shape = CircleShape)
-                    .wrapContentSize(Alignment.TopCenter)
-                    .padding(top = 5.dp)
-            )
-            Text(
-                text = "ASIR ",
-                fontSize = 13.sp,
-                modifier = Modifier
-                    .size(70.dp)
-                    .background(color = Color.Magenta)
-                    .border(3.dp, color = Color.Black)
-                    .wrapContentSize(Alignment.BottomEnd)
-                    .padding(bottom = 5.dp)
-            )
+        // Añadir 5 items
+        items(5) { index ->
+            Text(text = "Item: $index")
+        }
+
+        // Añadir otro item simple
+        item {
+            Text(text = "Último item")
+        }
+        itemsIndexed(mensajes) { index, mensaje ->
         }
     }
 }
 
+@Composable
+fun Carta(){
+    Card{
+        var expanded by remember { mutableStateOf(false) }
+        Column(Modifier.clickable { expanded=!expanded }){
+            Image(painterResource(R.drawable.lp))
+            AnimatedVisibility(expanded) {
+                Text(text="Linkin Park",
+                    style = MaterialTheme.typography.bodyLarge)
+            }
+        }
+    }
+}
