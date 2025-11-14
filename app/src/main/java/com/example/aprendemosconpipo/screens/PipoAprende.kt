@@ -20,6 +20,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -31,7 +32,6 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -81,7 +81,7 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
 
         // Categorías principales
         val categories =
-            listOf("Lista", "Ejemplo lista", "Botones", "Carta")
+            listOf("Lista", "Entrega lista", "Botones", "Carta")
 
         Column(
             modifier = Modifier
@@ -128,7 +128,7 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
 
                     1 -> { // Ejemplo lista
                         when (selectedTabIndex) {
-                            0 -> JugadoresScreen()
+                            0 -> ListaDesplegable()
                         }
                     }
 
@@ -151,12 +151,12 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
 }
 
 // Ejemplo apuntes de clase, pero modificado
-data class Mensaje(
-    val titulo: String,
-    val descCorta: String,
-    val descLarga: String,
-    val imagenId: Int
-)
+//data class Mensaje(
+//    val titulo: String,
+//    val descCorta: String,
+//    val descLarga: String,
+//    val imagenId: Int
+//)
 
 
 //@OptIn(ExperimentalMaterial3Api::class)
@@ -201,72 +201,76 @@ data class Mensaje(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun JugadoresScreen() {
-    // Lista de mensajes con información de jugadores de T1
+fun ListaDesplegable() {
+    // Para meter los datos que iran en cada card
     val mensajes = listOf(
         Mensaje(
-            "Doran",
-            "Toplaner de T1",
-            "Doran es el toplaner de T1. Se unió al equipo a finales de 2024 y ha demostrado ser un jugador sólido con gran capacidad mecánica. Conocido por su pool de campeones diverso y su habilidad para jugar tanto tanques como carries en la línea superior.",
-            R.drawable.lp
-        ),
-        Mensaje(
-            "Oner",
-            "Jungla de T1",
-            "Oner es el jungler de T1. Campeón mundial en 2023 y 2024, es conocido por su excelente visión del juego y capacidad para coordinar ganks con sus compañeros. Su estilo de juego agresivo complementa perfectamente la filosofía del equipo.",
+            "Linkin Park",
+            "Empezaron en 1996",
+            "Linkin Park es una banda estadounidense de rock alternativo y rap rock que en sus inicios se caracterizó por su sonido de nu metal y rap metal.",
             R.drawable.lp2
         ),
         Mensaje(
-            "Faker",
-            "Midlaner de T1",
-            "Faker, también conocido como 'El Rey Demonio', es considerado el mejor jugador de League of Legends de todos los tiempos. Con 5 campeonatos mundiales y múltiples títulos de la LCK, su legado es incomparable. Su mecánica, visión de juego y liderazgo han definido una era en los esports.",
+            "Sleeping With Sirens",
+            "Empezaron en 2009",
+            "Sleeping With Sirens es una banda estadounidense de post-hardcore procedente de Orlando, aunque actualmente reside en Grand Rapids, Estados Unidos. La banda fue fundada por miembros de For All We Know, Broadway, y Paddock Park.",
+            R.drawable.sleeping
+        ),
+        Mensaje(
+            "Desakato",
+            "Empezaron en 2003",
+            "Desakato fue un grupo de punk rock procedente de Llanera, en Asturias, que pese a cantar generalmente en castellano, en todos los discos incluye al menos un tema en asturiano. ",
+            R.drawable.zoo
+        ),
+        Mensaje(
+            "Zoo",
+            "Empezaron en 2014",
+            "ZOO, también conocido como Zoo Posse, fue un grupo musical valenciano nacido en 2014 en Gandía que se centra en el hip hop, el breakbeat, el rock y el ska, mezclados con ritmos electrónicos.",
             R.drawable.lp2
         ),
         Mensaje(
-            "Gumayusi",
-            "ADC de T1",
-            "Gumayusi es el ADC de T1. Campeón mundial en 2023 y 2024, destaca por su agresividad en la línea y su capacidad para llevar partidas en las fases tardías. Su química con Keria forma una de las mejores botlanes del mundo.",
-            R.drawable.lp2
+            "Aspencat",
+            "Empezaron en 2005",
+            "Aspencat fue un grupo musical español originario de Jalón, provincia de Alicante, en la Comunidad Valenciana. Su estilo se ha basado en el ska, el reggae y el drum and bass, pero en su última etapa han avanzado hacia unos ritmos más electrónicos donde se puede ver la presencia del dubstep.",
+            R.drawable.aspencat
         ),
-        Mensaje(
-            "Keria",
-            "Support de T1",
-            "Keria es el support de T1 y campeón mundial en 2023 y 2024. Reconocido por su creatividad y mecánica excepcional, revoluciona constantemente el rol de support con picks innovadores. Su roaming y visión del mapa son elementos clave en el éxito de T1.",
-            R.drawable.lp2
-        )
     )
-
     Scaffold(
+        // Barra superior con titulo
         topBar = {
             CenterAlignedTopAppBar(
+                modifier = Modifier.height(60.dp),
                 title = {
                     Text(
-                        text = "T1 - Jugadores",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp,
-                        color = Color.White
+                        "Grupos de música",
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = Color(0xFFE6002D)
+                colors = topAppBarColors(
+                    containerColor = Color(0xFF6729DC),
+                    titleContentColor = Color.White
                 )
             )
-        },
-        containerColor = Color.Black
+        }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .fillMaxHeight()
                 .padding(innerPadding)
+                .background(Color.Black),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Creamos una carta por cada registro en mensajes
             itemsIndexed(mensajes) { index, mensaje ->
-                JugadorItem(mensaje = mensaje, index = index)
+                Grupos(mensaje = mensaje, index = index)
 
                 if (index < mensajes.size - 1) {
                     HorizontalDivider(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        thickness = 1.dp,
-                        color = Color(0xFFE6002D).copy(alpha = 0.4f)
+                        thickness = 5.dp,
+                        color = Color(0xFFFFDE0D).copy(alpha = 0.8f)
                     )
                 }
             }
@@ -274,29 +278,41 @@ fun JugadoresScreen() {
     }
 }
 
+
+data class Mensaje(
+    val nombre: String,
+    val descCorta: String,
+    val descLarga: String,
+    val imagenID: Int
+)
+
+// Creamos card con estructura deseada de lista
 @Composable
-fun JugadorItem(mensaje: Mensaje, index: Int) {
+fun Grupos(mensaje: Mensaje, index: Int) {
     var expanded by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 16.dp)
-            .clickable { expanded = !expanded }
+            .clickable { expanded = !expanded },
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFBABABD)
+        )
     ) {
         Row(
             modifier = Modifier
-                .padding(12.dp)
+                .padding(10.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = mensaje.imagenId),
-                contentDescription = "Imagen de ${mensaje.titulo}",
+                painter = painterResource(id = mensaje.imagenID),
+                contentDescription = "Imagen del grupo ${mensaje.nombre}",
                 modifier = Modifier
-                    .size(80.dp)
                     .clip(CircleShape)
-                    .border(2.dp, Color(0xFFE6002D), CircleShape)
+                    .border(shape = CircleShape, width = 2.dp, color = Color(0xFF6729DC))
+                    .size(100.dp)
             )
             Column(
                 modifier = Modifier
@@ -304,16 +320,17 @@ fun JugadorItem(mensaje: Mensaje, index: Int) {
                     .weight(1f)
             ) {
                 Text(
-                    text = mensaje.titulo,
+                    text = mensaje.nombre,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    color = Color.Black
+                    color = Color.Red
                 )
                 Text(
                     text = mensaje.descCorta,
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
+                // Texto a mostrar cuando se hace clic
                 AnimatedVisibility(visible = expanded) {
                     Text(
                         text = mensaje.descLarga,
@@ -339,8 +356,7 @@ fun Lista() {
     )
     {
         //Cuandro para entregar
-        LazyColumn(
-        ) {
+        LazyColumn {
             //Un item simple
             item {
                 Row(
@@ -358,7 +374,7 @@ fun Lista() {
                             .size(100.dp),
                     )
                     var expanded by remember { mutableStateOf(false) }
-                    val patata: String = LoremIpsum(200).values.first().toString()
+                    val patata: String = LoremIpsum(200).values.first()
                     Column(
                         modifier = Modifier
                             //.fillMaxSize()
