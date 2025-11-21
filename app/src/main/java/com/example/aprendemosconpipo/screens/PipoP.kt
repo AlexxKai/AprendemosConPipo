@@ -95,7 +95,7 @@ fun PipoP(navController: NavController) {
                     modifier = Modifier
                         .padding(horizontal = 50.dp, vertical = 10.dp),
                     onClick = {
-                        navController.navigate(route = AppScreens.PipoS.route)
+                        navController.navigate(route = AppScreens.PipoS.route+"/Hola buenas")
                         println("Botón pulsado")
                     }) {
                     Text(text = "PipoS")

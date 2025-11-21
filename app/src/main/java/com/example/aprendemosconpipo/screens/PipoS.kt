@@ -23,7 +23,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class) // Needed for TopAppBar
 @Composable
-fun PipoS(navController: NavController) {
+fun PipoS(navController: NavController, text: String?) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -57,6 +57,9 @@ fun PipoS(navController: NavController) {
                     println("Botón pulsado atrás")
                 }) {
                 Text(text = "Volver atrás")
+            }
+            text?.let {
+                Text(it)
             }
             repeat(20) {
                 Text(
