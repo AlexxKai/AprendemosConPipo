@@ -23,7 +23,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class) // Needed for TopAppBar
 @Composable
-fun PipoS(navController: NavController, text: String?) {
+fun PipoS(navController: NavController, text: String?, text1: String?) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -66,6 +66,9 @@ fun PipoS(navController: NavController, text: String?) {
                     "Item $it",
                     modifier = Modifier.padding(2.dp)
                 )
+            }
+            text1?.let {
+                Text(it)
             }
         }
     }

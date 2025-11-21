@@ -31,11 +31,12 @@ fun AppNavigation(modifier: Modifier) {
             route = AppScreens.PipoP.route) {
             PipoP(navController)
         }
-        composable(route = AppScreens.PipoS.route+ "/{text}",
-            arguments = listOf(navArgument(name = "text") {
-                type = NavType.StringType
-            })) {
-            PipoS(navController, it.arguments?.getString("text"))
+        composable(route = AppScreens.PipoS.route+ "/{text}/{text1}",
+            arguments = listOf(
+                navArgument(name = "text") {type = NavType.StringType},
+                navArgument(name = "text1") {type = NavType.StringType}
+            )) {
+            PipoS(navController, it.arguments?.getString("text"), it.arguments?.getString("text1"))
         }
         composable(route = AppScreens.EjemplosDePipo.route) {
             EjemplosDePipo(navController)

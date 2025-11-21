@@ -220,13 +220,13 @@ fun ListaDesplegable() {
             "Desakato",
             "Empezaron en 2003",
             "Desakato fue un grupo de punk rock procedente de Llanera, en Asturias, que pese a cantar generalmente en castellano, en todos los discos incluye al menos un tema en asturiano. ",
-            R.drawable.zoo
+            R.drawable.desakato
         ),
         Mensaje(
             "Zoo",
             "Empezaron en 2014",
             "ZOO, también conocido como Zoo Posse, fue un grupo musical valenciano nacido en 2014 en Gandía que se centra en el hip hop, el breakbeat, el rock y el ska, mezclados con ritmos electrónicos.",
-            R.drawable.lp2
+            R.drawable.zoo
         ),
         Mensaje(
             "Aspencat",
