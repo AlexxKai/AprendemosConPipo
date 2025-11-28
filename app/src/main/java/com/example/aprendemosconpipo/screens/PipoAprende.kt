@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.input.TextFieldLineLimits
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
@@ -32,6 +34,7 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
@@ -81,7 +85,7 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
 
         // Categorías principales
         val categories =
-            listOf("Lista", "Entrega lista", "Botones", "Carta")
+            listOf("Entrega lista", "Formulario", "Carta", "Lista")
 
         Column(
             modifier = Modifier
@@ -120,27 +124,27 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
                 color = Color.DarkGray
             ) {
                 when (selectedCategoryIndex) {
-                    0 -> { // Lista
-                        when (selectedTabIndex) {
-                            0 -> Lista()
-                        }
-                    }
-
-                    1 -> { // Ejemplo lista
+                    0 -> { // Entrega lista
                         when (selectedTabIndex) {
                             0 -> ListaDesplegable()
                         }
                     }
 
-                    2 -> { // Botones
+                    1 -> { // Formulario
                         when (selectedTabIndex) {
-                            0 -> Botones()
+                            0 -> Formulario()
                         }
                     }
 
-                    3 -> { // Carta
+                    2 -> { // Carta
                         when (selectedTabIndex) {
                             0 -> Carta()
+                        }
+                    }
+
+                    3 -> { // Lista
+                        when (selectedTabIndex) {
+                            0 -> Lista()
                         }
                     }
 
@@ -149,55 +153,6 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
         }
     }
 }
-
-// Ejemplo apuntes de clase, pero modificado
-//data class Mensaje(
-//    val titulo: String,
-//    val descCorta: String,
-//    val descLarga: String,
-//    val imagenId: Int
-//)
-
-
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Composable
-//fun EjemploLista() {
-//
-//    val mensajes: listOf(
-//        Mensaje("Título 1", "Descripción 1", R.drawable.lp),
-//        Mensaje("Título 2", "Descripción 2", R.drawable.lp),
-//        Mensaje("Título 3", "Descripción 3", R.drawable.lp),
-//        Mensaje("Título 4", "Descripción 4", R.drawable.lp),
-//        Mensaje("Título 5", "Descripción 5", R.drawable.lp)
-//    )
-//    Column(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .fillMaxHeight()
-//            .background(Color.DarkGray),
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-////Ejemplo de los apuntes
-//        LazyColumn() {
-//            //Un item simple
-//            item {
-//                Text(text = "Primer item")
-//            }
-//
-//            // Añadir 5 items
-//            items(5) { index ->
-//                Text(text = "Item: $index")
-//            }
-//
-//            // Añadir otro item simple
-//            item {
-//                Text(text = "Último item")
-//            }
-//            itemsIndexed(mensajes) { index, mensaje ->
-//            }
-//        }
-//    }
-//}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -277,7 +232,6 @@ fun ListaDesplegable() {
         }
     }
 }
-
 
 data class Mensaje(
     val nombre: String,
@@ -424,5 +378,40 @@ fun Carta() {
                 )
             }
         }
+    }
+}
+
+
+@Composable
+fun Formulario() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(Color.DarkGray),
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
+    {
+        var textoIngresado by remember { mutableStateOf("Hola\nMundo\nInvisible") }
+        TextField(
+            value = textoIngresado,
+            onValueChange = {
+                textoIngresado = it
+            },
+            maxLines = 2,
+            textStyle = TextStyle(color = Color.Green, fontWeight = FontWeight.Bold),
+            label = { Text("Introduce el texto") },
+            modifier = Modifier.padding(20.dp)
+        )
+
+        val nombre = rememberTextFieldState("Hola mundo")
+        TextField(
+            state = nombre,
+            lineLimits = TextFieldLineLimits.MultiLine(maxHeightInLines = 2),
+            textStyle = TextStyle(color = Color.Green, fontWeight = FontWeight.Bold),
+            placeholder = { Text("Introduce el nombre") },
+            label = { Text("Introduce el nombre") },
+            modifier = Modifier.padding(20.dp)
+        )
     }
 }

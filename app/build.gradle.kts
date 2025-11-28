@@ -63,4 +63,7 @@ dependencies {
 
     //Para navegar entre paginas
     implementation(libs.androidx.navigation.compose)
+
+    implementation("androidx.compose.material:material-icons-extended:1.5.0-alpha08") // Para los iconos
+    implementation("androidx.compose.material3:material3:1.5.0-alpha08") // Para tener el material3 actualizado
 }
