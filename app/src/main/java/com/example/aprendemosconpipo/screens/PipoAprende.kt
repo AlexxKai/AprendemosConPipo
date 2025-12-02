@@ -415,3 +415,16 @@ fun Formulario() {
         )
     }
 }
+//@Composable
+//fun Carta(){
+//    Card{
+//        var expanded by remember { mutableStateOf(false) }
+//        Column(Modifier.clickable { expanded=!expanded }){
+//            Image(painterResource(R.drawable.lp))
+//            AnimatedVisibility(expanded) {
+//                Text(text="Linkin Park",
+//                    style = MaterialTheme.typography.bodyLarge)
+//            }
+//        }
+//    }
+//}
