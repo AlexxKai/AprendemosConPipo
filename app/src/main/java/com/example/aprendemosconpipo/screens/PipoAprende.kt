@@ -17,8 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
@@ -34,7 +32,6 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,7 +44,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
@@ -85,7 +81,7 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
 
         // Categorías principales
         val categories =
-            listOf("Entrega lista", "Formulario", "Carta", "Lista")
+            listOf("Entrega lista", "Carta", "Lista")
 
         Column(
             modifier = Modifier
@@ -130,19 +126,13 @@ fun PipoAprende(navController: NavController, modifier: Modifier.Companion = Mod
                         }
                     }
 
-                    1 -> { // Formulario
-                        when (selectedTabIndex) {
-                            0 -> Formulario()
-                        }
-                    }
-
-                    2 -> { // Carta
+                    1 -> { // Carta
                         when (selectedTabIndex) {
                             0 -> Carta()
                         }
                     }
 
-                    3 -> { // Lista
+                    2 -> { // Lista
                         when (selectedTabIndex) {
                             0 -> Lista()
                         }
@@ -380,51 +370,3 @@ fun Carta() {
         }
     }
 }
-
-
-@Composable
-fun Formulario() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .background(Color.DarkGray),
-        horizontalAlignment = Alignment.CenterHorizontally
-    )
-    {
-        var textoIngresado by remember { mutableStateOf("Hola\nMundo\nInvisible") }
-        TextField(
-            value = textoIngresado,
-            onValueChange = {
-                textoIngresado = it
-            },
-            maxLines = 2,
-            textStyle = TextStyle(color = Color.Green, fontWeight = FontWeight.Bold),
-            label = { Text("Introduce el texto") },
-            modifier = Modifier.padding(20.dp)
-        )
-
-        val nombre = rememberTextFieldState("Hola mundo")
-        TextField(
-            state = nombre,
-            lineLimits = TextFieldLineLimits.MultiLine(maxHeightInLines = 2),
-            textStyle = TextStyle(color = Color.Green, fontWeight = FontWeight.Bold),
-            placeholder = { Text("Introduce el nombre") },
-            label = { Text("Introduce el nombre") },
-            modifier = Modifier.padding(20.dp)
-        )
-    }
-}
-//@Composable
-//fun Carta(){
-//    Card{
-//        var expanded by remember { mutableStateOf(false) }
-//        Column(Modifier.clickable { expanded=!expanded }){
-//            Image(painterResource(R.drawable.lp))
-//            AnimatedVisibility(expanded) {
-//                Text(text="Linkin Park",
-//                    style = MaterialTheme.typography.bodyLarge)
-//            }
-//        }
-//    }
-//}
