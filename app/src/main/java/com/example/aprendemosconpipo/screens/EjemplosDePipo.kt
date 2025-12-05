@@ -96,7 +96,7 @@ fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = 
 
         // Categorías principales
         val categories =
-            listOf("Cuadros iniciales", "Imagenes", "Iconos", "Botones", "Variable")
+            listOf("Cuadros iniciales", "Imagenes", "Iconos", "Variable")
 
 //    // Pestañas por categoría
 //    val tabsByCategory = listOf(
@@ -178,13 +178,7 @@ fun EjemplosDePipo(navController: NavController, modifier: Modifier.Companion = 
                         }
                     }
 
-                    3 -> { // Botones
-                        when (selectedTabIndex) {
-                            0 -> Botones()
-                        }
-                    }
-
-                    4 -> { // Variable
+                    3 -> { // Variable
                         when (selectedTabIndex) {
                             0 -> Variable()
                         }
@@ -320,102 +314,6 @@ fun Iconos() {
             //para meter content description en string, tengo que crearlo en res/values/strings.xml
             contentDescription = stringResource(id = dados),
         )
-    }
-}
-
-//Botones
-@Composable
-fun Botones() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            // Para hacer scroll en la pantalla
-            .verticalScroll(rememberScrollState())
-            .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-
-            Button(onClick = { })
-            { Text("Filled") }
-
-            FilledTonalButton(onClick = { })
-            { Text("Tonal") }
-
-            OutlinedButton(onClick = { })
-            { Text("Outlined") }
-        }
-
-        Row(
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-
-            ElevatedButton(onClick = { })
-            { Text("Elevated") }
-
-            TextButton(onClick = { })
-            { Text("Text Button") }
-        }
-
-        Row(
-            modifier = Modifier
-                .padding(top = 20.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-
-            FloatingActionButton(onClick = { })
-            { Icon(Icons.Filled.Add, "Floating action button.") }
-
-            SmallFloatingActionButton(
-                onClick = {},
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                contentColor = MaterialTheme.colorScheme.secondary
-            )
-            {
-                Icon(Icons.Filled.Add, "Small floating action button.")
-            }
-
-            LargeFloatingActionButton(
-                onClick = {},
-                shape = CircleShape,
-            )
-            { Icon(Icons.Filled.Add, "Large floating action button") }
-
-
-            ExtendedFloatingActionButton(
-                onClick = {},
-                icon = { Icon(Icons.Filled.Edit, "Extended floating action button.") },
-                text = { Text(text = "Extended FAB") },
-            )
-        }
-
-        Column(modifier = Modifier.padding(16.dp)) {
-            var name by remember { mutableStateOf("") }
-            if (name.isNotEmpty()) {
-                Text(
-                    text = "Hola, $name!",
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-            OutlinedTextField(
-                value = name, // Valor actual del campo de texto es la variable name
-                onValueChange = {
-                    name = it
-                }, // Actualiza la variable name con el nuevo valor escrito
-                label = { Text("Nombre") } // Etiqueta dentro del campo de texto para indicarquéinformacióndebeingresarse)}
-            )
-        }
     }
 }
 
